@@ -15,16 +15,19 @@ Deux répertoires :
   * Artifactory OK
   * Déploiement OK
 
+
 * Authentication Server :
   * Build OK
   * Sonarqube OK
   * Artifactory OK
   * Déploiement OK
 
+
 * Mobile :
   * Build OK
   * Sonarqube OK
   * Artifactory OK
+
 
 * Web :
   * Build PAS OK
