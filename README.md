@@ -33,7 +33,7 @@ Deux répertoires :
 ---
 
 * Web :
-  * Build PAS OK
-  * Sonarqube PAS OK
-  * Artifactory PAS OK
-  * Déploiement PAS OK
+  * Build OK
+  * Sonarqube OK
+  * Artifactory OK
+  * Déploiement OK
