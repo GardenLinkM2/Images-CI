@@ -19,7 +19,7 @@ artifactory {
         repository {
             repoKey = 'gradle-release-local'
             username = "ci-user"
-            password = "{{EDITED}}"
+            password = "MDP"
             maven = true
             
         }
@@ -28,7 +28,7 @@ artifactory {
         repository {
             repoKey = 'gradle-dev'
             username = "ci-user"
-            password = "{{EDITED}}"
+            password = "MDP"
             maven = true
             
         }

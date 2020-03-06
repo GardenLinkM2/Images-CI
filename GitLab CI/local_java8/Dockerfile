@@ -19,7 +19,7 @@ RUN $JAVA_HOME/bin/keytool -storepasswd -new mysecretpassword -keystore $JAVA_HO
 
 ENV MAVEN_HOME /usr/share/maven
 ENV MAVEN_CONFIG "/root/.m2"
-ENV MAVEN_ARGS "-Dsonar.host.url=https://quality.artheriom.fr/ -Dsonar.login={{EDITED}}"
-ENV MAVEN_OPTS "-Dsonar.host.url=https://quality.artheriom.fr/ -Dsonar.login={{EDITED}}"
-ENV GRADLE_OPTS "-Dsonar.host.url=https://quality.artheriom.fr/ -Dsonar.login={{EDITED}}"
+ENV MAVEN_ARGS "-Dsonar.host.url=https://quality.artheriom.fr/ -Dsonar.login=MDP"
+ENV MAVEN_OPTS "-Dsonar.host.url=https://quality.artheriom.fr/ -Dsonar.login=MDP"
+ENV GRADLE_OPTS "-Dsonar.host.url=https://quality.artheriom.fr/ -Dsonar.login=MDP"
 COPY settings.xml /root/.m2/settings.xml

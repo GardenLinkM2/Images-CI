@@ -1,4 +1,4 @@
-FROM openjdk:8-jdk
+FROM openjdk:11-jdk
 MAINTAINER Forestier Florian <Florian.Forestier@etu.uca.fr>
 
 
@@ -18,9 +18,9 @@ RUN $JAVA_HOME/bin/keytool -storepasswd -new mysecretpassword -keystore $JAVA_HO
 
 ENV MAVEN_HOME /usr/share/maven
 ENV MAVEN_CONFIG "/root/.m2"
-ENV MAVEN_ARGS "-Dsonar.host.url=https://quality.artheriom.fr/ -Dsonar.login={{EDITED}}"
-ENV MAVEN_OPTS "-Dsonar.host.url=https://quality.artheriom.fr/ -Dsonar.login={{EDITED}}"
-ENV GRADLE_OPTS "-Dsonar.host.url=https://quality.artheriom.fr/ -Dsonar.login={{EDITED}}"
+ENV MAVEN_ARGS "-Dsonar.host.url=https://quality.artheriom.fr/ -Dsonar.login=MDP"
+ENV MAVEN_OPTS "-Dsonar.host.url=https://quality.artheriom.fr/ -Dsonar.login=MDP"
+ENV GRADLE_OPTS "-Dsonar.host.url=https://quality.artheriom.fr/ -Dsonar.login=MDP"
 COPY settings.xml /root/.m2/settings.xml
 
 RUN wget --output-document=android-sdk.zip https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip
@@ -37,9 +37,9 @@ RUN wget --output-document=sonar.zip https://binaries.sonarsource.com/Distributi
 RUN unzip -d sonar sonar.zip
 ENV SONAR_HOME $PWD/sonar/sonar-scanner-4.2.0.1873-linux/bin
 ENV PATH $PATH:$PWD/sonar/sonar-scanner-4.2.0.1873-linux/bin
-ENV CURL_CREDENTIALS "-u admin:{{EDITED}} -k"
+ENV CURL_CREDENTIALS "-u admin:MDP -k"
 
-ENV SONAR_SCANNER_OPTS "-Dsonar.host.url=https://quality.artheriom.fr/ -Dsonar.login={{EDITED}} -Dsonar.projectKey=mobile -Dsonar.java.binaries=build/intermediates/classes"
+ENV SONAR_SCANNER_OPTS "-Dsonar.host.url=https://quality.artheriom.fr/ -Dsonar.login=MDP -Dsonar.projectKey=mobile -Dsonar.java.binaries=app/build/intermediates/javac/debug/classes/com/gardenlink_mobile"
 
 RUN $JAVA_HOME/bin/keytool -storepasswd -new mysecretpassword -keystore $PWD/sonar/sonar-scanner-4.2.0.1873-linux/jre/lib/security/cacerts -storepass changeit && \
     echo "yes" | $JAVA_HOME/bin/keytool -import -trustcacerts -file /etc/ssl/certs/My_Root_CA.cer -alias my-root-ca -keystore $PWD/sonar/sonar-scanner-4.2.0.1873-linux/jre/lib/security/cacerts -storepass mysecretpassword && \

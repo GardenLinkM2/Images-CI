@@ -21,7 +21,7 @@ requested = args.requested
 
 
 
-instances_rq = requests.get(url=compute_api+requested, verify=False, auth=HTTPBasicAuth("admin", "{{EDITED}}"))
+instances_rq = requests.get(url=compute_api+requested, verify=False, auth=HTTPBasicAuth("admin", "MDP"))
 instance_file = json.loads(instances_rq.content)
 
 found=False
@@ -35,7 +35,7 @@ if(isMaven):
         if(instance_file["children"][nb-1]["folder"]):
             foundMaven=True
             requested = requested+instance_file["children"][nb-1]["uri"]
-            instances_rq = requests.get(url=compute_api+requested, verify=False, auth=HTTPBasicAuth("admin", "{{EDITED}}"))
+            instances_rq = requests.get(url=compute_api+requested, verify=False, auth=HTTPBasicAuth("admin", "MDP"))
             instance_file = json.loads(instances_rq.content)
             nb = len(instance_file["children"])
         else:
@@ -56,10 +56,10 @@ if(file==""):
     print("FATAL : File not found !")
     exit(0)
 
-instances_rq = requests.get(url=compute_api+requested+file, verify=False, auth=HTTPBasicAuth("admin", "{{EDITED}}"))
+instances_rq = requests.get(url=compute_api+requested+file, verify=False, auth=HTTPBasicAuth("admin", "MDP"))
 instance_file = json.loads(instances_rq.content)
 
-instances_rq = requests.get(url=instance_file["downloadUri"], verify=False, auth=HTTPBasicAuth("admin", "{{EDITED}}"))
+instances_rq = requests.get(url=instance_file["downloadUri"], verify=False, auth=HTTPBasicAuth("admin", "MDP"))
 
 
 f = open(outputName, "wb")

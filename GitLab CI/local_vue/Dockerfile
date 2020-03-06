@@ -4,23 +4,16 @@ MAINTAINER Forestier Florian <Florian.Forestier@etu.uca.fr>
 
 
 RUN apt-get update --yes
-RUN apt-get install --yes curl git chromium openjdk-8-jdk wget unzip 
+RUN apt-get install --yes curl git openjdk-8-jdk wget unzip 
 RUN curl -sL https://deb.nodesource.com/setup_10.x | bash -
 RUN apt-get install build-essential nodejs -y
-
-ENV CHROME_BIN="/usr/bin/chromium"
-
-RUN echo n | npm install -g --silent @angular/cli
-
-RUN alias ng="/usr/bin/ng"
-
 
 RUN wget --output-document=sonar.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.2.0.1873-linux.zip
 RUN unzip -d sonar sonar.zip
 ENV SONAR_HOME "$PWD/sonar/sonar-scanner-4.2.0.1873-linux/bin"
 ENV PATH "$PATH:$PWD/sonar/sonar-scanner-4.2.0.1873-linux/bin"
 
-ENV SONAR_SCANNER_OPTS "-Dsonar.host.url=https://quality.artheriom.fr/ -Dsonar.login=MDP -Dsonar.projectKey=web"
+ENV SONAR_SCANNER_OPTS "-Dsonar.host.url=https://quality.artheriom.fr/ -Dsonar.login=MDP -Dsonar.projectKey=admin"
 
 COPY My_Root_CA.cer /etc/ssl/certs/My_Root_CA.cer
 COPY My_Issuing_CA.cer /etc/ssl/certs/My_Issuing_CA.cer
@@ -33,5 +26,5 @@ RUN $JAVA_HOME/bin/keytool -storepasswd -new mysecretpassword -keystore $PWD/son
 
 
 ENV CURL_PARAMS "-u admin:MDP -T archive.tar -k"
-ENV BINARIES "https://binaries.artheriom.fr/artifactory/generic-local/web"
+ENV BINARIES "https://binaries.artheriom.fr/artifactory/generic-local/admin"
 

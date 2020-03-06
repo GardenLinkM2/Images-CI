@@ -30,7 +30,7 @@ RUN $JAVA_HOME/bin/keytool -storepasswd -new mysecretpassword -keystore $JAVA_HO
 RUN dotnet tool install --global dotnet-sonarscanner --version 4.8.0 
 
 
-ENV SONAR_LOGIN "/d:sonar.login={{EDITED}}"
+ENV SONAR_LOGIN "/d:sonar.login=MDP"
 ENV SONAR_URL "/k:"backend" /d:sonar.host.url=https://quality.artheriom.fr/"
-ENV CURL_PARAMS "-u admin:{{EDITED}} -T archive.tar -k"
+ENV CURL_PARAMS "-u admin:MDP -T archive.tar -k"
 ENV BINARIES "https://binaries.artheriom.fr/artifactory/generic-local/backend"
