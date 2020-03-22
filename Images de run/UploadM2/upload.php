@@ -3,20 +3,20 @@
 header("Access-Control-Allow-Headers: *");
 header("Access-Control-Allow-Origin: *");
 
-if(!empty($_FILES['up']['name'])){
-    $extension = strtolower(strrchr($_FILES['up']['name'], '.'));
+$toReturn =  "[";
+
+foreach ($_FILES as $value){
+    $extension = strtolower(strrchr($value['name'], '.'));
     $fichier = time()."_".rand(10000,99999) . $extension;
 
     $dossier = 'images/';
     $dossierfiles = 'files/';
 
     $taille_maxi = 30000000;
-    $taille = filesize($_FILES['up']['tmp_name']);
+    $taille = filesize($value['tmp_name']);
 
     $extensionimageredim = array('.png', '.jpg', '.jpeg', '.jpe', '.jfif', '.gif');
     $extensionjpg = array('.jpg','.jpeg','.jpe','.jfif');
-    $extensionfiles= array('.pdf', '.doc', '.xls', '.ppt', '.pps', '.txt', '.gpg', '.pgp', '.asc', '.xmind', '.wotreplay');
-
 
     if($taille>$taille_maxi) {
         http_response_code(400);
@@ -24,7 +24,7 @@ if(!empty($_FILES['up']['name'])){
     }
 
     if (in_array($extension, $extensionimageredim) && $taille_maxi >= $taille) {
-        if (move_uploaded_file($_FILES['up']['tmp_name'], $dossier.$fichier)) //Si la fonction renvoie TRUE, c'est que ça a fonctionné...
+        if (move_uploaded_file($value['tmp_name'], $dossier.$fichier)) //Si la fonction renvoie TRUE, c'est que ça a fonctionné...
         {
             $source=(in_array($extension, $extensionjpg))?
                 imagecreatefromjpeg($dossier.$fichier):
@@ -60,18 +60,12 @@ if(!empty($_FILES['up']['name'])){
             }
             imagedestroy($source);
 
-            echo $dossier . $fichier;
+            $toReturn = $toReturn. "\"https://uploadm2.artheriom.fr/". $dossier . $fichier."\",";
         }
-    }
-    elseif(in_array($extension, $extensionfiles) && $taille_maxi >= $taille) {
-        if (move_uploaded_file($_FILES['up']['tmp_name'], $dossierfiles . $fichier)) //Si la fonction renvoie TRUE, c'est que ça a fonctionné...
-        {
-            echo $dossierfiles . $fichier;
-        }
-    }
-    else{
-        http_response_code(400);
-        die;
     }
 }
+
+$toReturn = substr($toReturn, 0, -1);
+echo $toReturn . "]";
+
 ?>
